@@ -2,7 +2,7 @@
 
 # Install requirements
 echo "Install system requirements"
-cat ~/.bin/additionnal/requirements.system | xargs sudo apt install -y
+wget --no-cache -O - https://raw.githubusercontent.com/Nicolas-Boulard/dot-files/master/.bin/additionnal/requirements.system | xargs sudo apt install -y
 
 echo "Install requirements"
 wget --no-cache -O - https://raw.githubusercontent.com/Nicolas-Boulard/dot-files/master/.bin/additionnal/install-git | bash
