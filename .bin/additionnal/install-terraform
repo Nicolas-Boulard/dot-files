@@ -7,4 +7,5 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
 https://apt.releases.hashicorp.com $(echo $VERSION_CODENAME) main" | \
 sudo tee /etc/apt/sources.list.d/hashicorp.list
 echo "Install terraform"
+sudo apt-get update
 sudo apt-get install terraform
