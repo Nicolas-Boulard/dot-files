@@ -1,4 +1,0 @@
-echo "Removing zsh config and theme 🧹"
-rm -rf ~/.zshrc
-rm -rf ~/.p10k.zsh
-rm -rf ~/.oh-my-zsh

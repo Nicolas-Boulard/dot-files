@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Install requirements
+echo "Install requirements"
+bash ~/.bin/additionnal/install-git
+
+echo "Clone dot-files repo"
+git clone --bare git@github.com:Nicolas-Boulard/dot-files.git $HOME/.dot-files
+
+function config {
+   git --git-dir=$HOME/.dot-files/ --work-tree=$HOME $@
+}
+mkdir -p .config-backup
+config checkout
+if [ $? = 0 ]; then
+  echo "Checked out config.";
+  else
+    echo "Backing up pre-existing dot files.";
+    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+fi;
+config checkout
+config config status.showUntrackedFiles no
+
+echo "Install additionnal installation"
+bash ~/.bin/additionnal/install-exa
+
+echo "Running update"
+sudo apt update
+echo "Install system requirements"
+cat ~/.bin/additionnal/requirements.system | xargs sudo apt install -y
+
+echo "Install Ansible"
+bash ~/.bin/additionnal/install-ansible
+
+echo "Install Terraform"
+bash ~/.bin/additionnal/install-terraform
+
+echo "Install oh-my-zsh"
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+echo "Install p10k theme"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+echo "Install ZSH custom plugins"
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
