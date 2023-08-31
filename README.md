@@ -6,6 +6,7 @@ Follow steps on powerlevel10k [here](https://github.com/romkatv/powerlevel10k/bl
 
 Packages:
 - openssh
+- wget
 
 ## How to install 🛠️
 Simply run this command to install my dot files `wget -O - https://raw.githubusercontent.com/Nicolas-Boulard/dot-files/master/.bin/dot-file-install | bash` as normal user
