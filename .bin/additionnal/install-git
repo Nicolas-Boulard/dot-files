@@ -1,8 +1,8 @@
 #!/bin/bash
 GIT_PACKAGE_URL="https://github.com/git/git/archive/refs/heads/master.zip"
 echo "Let's install git because APT has older version 🧐"
-wget -O $(basename "https://github.com/git/git/archive/refs/heads/master.zip") -P /tmp -q $GIT_PACKAGE_URL
-unzip -o -d /tmp/$(basename "https://github.com/git/git/archive/refs/heads/master.zip")_dir /tmp/$(basename "https://github.com/git/git/archive/refs/heads/master.zip")
+wget -o $(basename $GIT_PACKAGE_URL) -P /tmp -q "$GIT_PACKAGE_URL"
+unzip -o -d /tmp/$(basename $GIT_PACKAGE_URL)_dir /tmp/$(basename $GIT_PACKAGE_URL)
 sudo apt-get update
 sudo apt-get install -y make libssl-dev libghc-zlib-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip
 cd /tmp/$(basename "$GIT_PACKAGE_URL")_dir/git-master/
