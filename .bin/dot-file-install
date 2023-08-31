@@ -3,6 +3,10 @@
 # Install requirements
 echo "Install system requirements"
 sudo apt update
+
+# Move .zshrc to backup it
+mv .zshrc .zshrc.bak
+
 wget --no-cache -O - https://raw.githubusercontent.com/Nicolas-Boulard/dot-files/master/.bin/additionnal/requirements.system | xargs sudo apt install -y
 
 echo "Install requirements"
@@ -51,6 +55,7 @@ git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.o
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+mv .zshrc.bak .zshrc
 echo "Set zsh asq default shell"
 sudo chsh -s $(which zsh) $USER
 
