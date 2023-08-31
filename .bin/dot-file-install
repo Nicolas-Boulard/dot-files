@@ -4,9 +4,6 @@
 echo "Install system requirements"
 sudo apt update
 
-# Move .zshrc to backup it
-mv .zshrc .zshrc.bak
-
 wget --no-cache -O - https://raw.githubusercontent.com/Nicolas-Boulard/dot-files/master/.bin/additionnal/requirements.system | xargs sudo apt install -y
 
 echo "Install requirements"
@@ -28,6 +25,9 @@ if [ $? = 0 ]; then
 fi;
 config checkout
 config config status.showUntrackedFiles no
+
+# Move .zshrc to backup it
+mv .zshrc .zshrc.bak
 
 echo "Install additionnal installation"
 bash ~/.bin/additionnal/install-exa
